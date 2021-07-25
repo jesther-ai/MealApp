@@ -1,8 +1,8 @@
 # Food App
 
-<img src="/screenshot/pic1.png" width="150" height="550"><img src="/screenshot/pic2.png" width="150" height="550">
+<img src="/screenshot/pic1.png" width="250" height="550"> <img src="/screenshot/pic2.png" width="250" height="550">
 <br>
-<img src="/screenshot/pic5.png" width="150" height="550"><img src="/screenshot/pic4.png" width="150" height="550">
+<img src="/screenshot/pic5.png" width="250" height="550"> <img src="/screenshot/pic4.png" width="250" height="550"><br>
 A new Flutter project.
 
 ## Getting Started
