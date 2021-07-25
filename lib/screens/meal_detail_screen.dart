@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import '../dummy_data.dart';
+import 'dart:io';
 
 class MealDetailScreen extends StatelessWidget {
-  const MealDetailScreen({Key? key}) : super(key: key);
   static const routeName = '/meal-detail';
-
+  final Function toggleFavorite;
+  final Function isFavorite;
+  MealDetailScreen(this.toggleFavorite, this.isFavorite);
   Widget _buildSectionTitle(BuildContext context, String text) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -36,10 +39,22 @@ class MealDetailScreen extends StatelessWidget {
     final selectedMeal = DUMMY_MEALS.firstWhere((element) {
       return element.id == mealId;
     });
+
+    PreferredSizeWidget _buildAppBar() {
+      return Platform.isIOS
+          ? CupertinoNavigationBar(
+              middle: Text(
+                selectedMeal.title,
+                style: TextStyle(fontSize: 22),
+              ),
+            ) as PreferredSizeWidget
+          : AppBar(
+              title: Text(selectedMeal.title),
+            );
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(selectedMeal.title),
-      ),
+      appBar: _buildAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -93,6 +108,14 @@ class MealDetailScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          isFavorite(mealId) ? Icons.star : Icons.star_border,
+        ),
+        onPressed: () {
+          toggleFavorite(mealId);
+        },
       ),
     );
   }
